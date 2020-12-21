@@ -5,6 +5,4 @@ config()
 
 const client = new Client();
 
-
-
 client.login(process.env.TOKEN)
