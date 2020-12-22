@@ -1,4 +1,5 @@
 import { Collection, Client, Message } from 'discord.js'
+import { BaseEvent } from './BaseEvent'
 
 interface IBaseCommand {
   config: {
@@ -25,10 +26,7 @@ interface IBaseCommand {
 }
 
 class NewClient extends Client {
-  events: Collection<string, {
-    listeners: string[] | string
-    run: (client: NewClient, ...params: any) => void
-  }[]>
+  events: Collection<string, BaseEvent[]>
   commands: Collection<string, IBaseCommand>
   aliases: Collection<string, IBaseCommand>
   
