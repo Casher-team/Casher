@@ -28,7 +28,7 @@ class NewClient extends Client {
   events: Collection<string, {
     listeners: string[] | string
     run: (client: NewClient, ...params: any) => void
-  }>
+  }[]>
   commands: Collection<string, IBaseCommand>
   aliases: Collection<string, IBaseCommand>
   
