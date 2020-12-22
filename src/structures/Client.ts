@@ -25,12 +25,16 @@ interface IBaseCommand {
 }
 
 class NewClient extends Client {
-  events: Collection<string, (client: NewClient, ...params: any) => void>
+  events: Collection<string, {
+    listeners: string[] | string
+    run: (client: NewClient, ...params: any) => void
+  }>
   commands: Collection<string, IBaseCommand>
   aliases: Collection<string, IBaseCommand>
   
   constructor() {
     super()
+
     this.events = new Collection()
     this.commands = new Collection()
     this.aliases = new Collection()
