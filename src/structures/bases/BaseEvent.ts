@@ -1,4 +1,4 @@
-import { NewClient } from "./Client";
+import { NewClient } from "../NewClient";
 
 interface IConstructorParams {
   listeners?: string[] | string

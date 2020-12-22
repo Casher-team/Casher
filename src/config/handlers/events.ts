@@ -1,8 +1,8 @@
 import { readdirSync } from 'fs'
 import { join } from 'path'
 
-import { NewClient } from "../../structures/Client"
-import { BaseEvent } from '../../structures/BaseEvent'
+import { NewClient } from "../../structures/NewClient"
+import { BaseEvent } from '../../structures/bases/BaseEvent'
 
 function eventsHandler(client: NewClient, eventsPath: string) {
   loadFolder(client, eventsPath)

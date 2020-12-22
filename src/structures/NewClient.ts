@@ -1,5 +1,5 @@
 import { Collection, Client, Message } from 'discord.js'
-import { BaseEvent } from './BaseEvent'
+import { BaseEvent } from './bases/BaseEvent'
 
 interface IBaseCommand {
   config: {

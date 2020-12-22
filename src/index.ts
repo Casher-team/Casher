@@ -1,5 +1,5 @@
 import { config } from 'dotenv'
-import { NewClient } from './structures/Client';
+import { NewClient } from './structures/NewClient';
 
 config()
 
