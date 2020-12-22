@@ -5,6 +5,7 @@ interface IBaseCommand {
     name: string
     aliases: string[]
     description: string
+    categories: string[]
     createdAt: Date
     createdTimestamp: number
     version: string
