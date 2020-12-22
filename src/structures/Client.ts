@@ -24,9 +24,9 @@ interface IBaseCommand {
 }
 
 class NewClient extends Client {
-  private events: Collection<string, (client: NewClient, ...params: any) => void>
-  private commands: Collection<string, IBaseCommand>
-  private aliases: Collection<string, IBaseCommand>
+  events: Collection<string, (client: NewClient, ...params: any) => void>
+  commands: Collection<string, IBaseCommand>
+  aliases: Collection<string, IBaseCommand>
   
   constructor() {
     super()
