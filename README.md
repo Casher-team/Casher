@@ -22,3 +22,14 @@ ou
 ```npm
 yarn start
 ```
+---
+
+## File config.json
+
+O arquivo `config.json` possui algumas configurações importantes que podem ser alteradas, mas tomando cuidado para manter alguns valores com os mesmos tipos, caso o tipo seja alterado, provavelmente será acusado algum erro. Aqui passaremos uma espécie de interface para o `config.json`:
+```ts
+{
+  "defaultCommandCooldownTime": number,
+  "defaultCommandCooldownUsageLimit": number
+}
+```
