@@ -1,34 +1,11 @@
-import { Collection, Client, Message } from 'discord.js'
+import { Collection, Client } from 'discord.js'
+import { BaseCommand } from './bases/BaseCommand'
 import { BaseEvent } from './bases/BaseEvent'
-
-interface IBaseCommand {
-  config: {
-    name: string
-    aliases: string[]
-    description: string
-    categories: string[]
-    createdAt: Date
-    createdTimestamp: number
-    version: string
-    releasesNotes: Collection<string, {
-      version: string
-      name: string
-      description: string
-      createdAt: Date
-      createdTimestamp: number
-    }>
-  };
-  run: (params: {
-    client?: NewClient
-    message?: Message
-    args?: string[]
-  }) => void
-}
 
 class NewClient extends Client {
   events: Collection<string, BaseEvent[]>
-  commands: Collection<string, IBaseCommand>
-  aliases: Collection<string, IBaseCommand>
+  commands: Collection<string, BaseCommand>
+  aliases: Collection<string, BaseCommand>
   
   constructor() {
     super()
