@@ -1,59 +1,10 @@
 import { Collection, Message } from "discord.js"
 import { NewClient } from "../NewClient"
 import { defaultCommandCooldownTime, defaultCommandCooldownUsageLimit } from '../../../config.json'
+import { ICommandConfig, ICommandConfigReleasesNotesValues, ICommandParams }  from './BaseCommand.types'
 
 defaultCommandCooldownTime as number
 defaultCommandCooldownUsageLimit as number
-
-interface ICommandConfigReleasesNotesValuesParams {
-  version?: string
-  name: string
-  description: string
-  createdAt?: Date
-  createdTimestamp: number
-}
-
-interface ICommandConfigReleasesNotesValues extends ICommandConfigReleasesNotesValuesParams {
-  version: string
-  createdAt: Date
-}
-
-interface ICommandConfigParams {
-  name: string
-  aliases?: string[] | string
-  description?: string
-  categories: string[] | string
-  cooldown?: {
-    time?: number
-    usageLimit?: number
-  } | number
-  isActive?: boolean
-  reasonInactivity?: string
-  createdAt?: Date
-  createdTimestamp: number
-  lastUpdateAt?: Date
-  lastUpdateTimestamp: number
-  version: string
-  releasesNotes?: Collection<string, ICommandConfigReleasesNotesValuesParams>
-}
-
-interface ICommandConfig extends ICommandConfigParams {
-  aliases: string[]
-  categories: string[]
-  cooldown: {
-    time: number
-    usageLimit: number
-  }
-  isActive: boolean
-  createdAt: Date
-  lastUpdateAt: Date
-  releasesNotes: Collection<string, ICommandConfigReleasesNotesValues>
-}
-
-interface ICommandParams {
-  config: ICommandConfigParams, 
-  run: (params: { client?: NewClient, message?: Message, args?: string[]}) => void
-}
 
 class BaseCommand {
   config: ICommandConfig
