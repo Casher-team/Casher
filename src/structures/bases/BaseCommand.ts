@@ -102,3 +102,5 @@ class BaseCommand {
     this.run = run
   }
 }
+
+export { BaseCommand }
