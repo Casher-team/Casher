@@ -1,3 +1,4 @@
 {
-  "defaultCommandCooldownTime": 0
+  "defaultCommandCooldownTime": 0,
+  "defaultCommandCooldownUsageLimit": 1
 }
