@@ -1,4 +1,5 @@
 {
   "defaultCommandCooldownTime": 0,
-  "defaultCommandCooldownUsageLimit": 1
+  "defaultCommandCooldownUsageLimit": 1,
+  "defaultLanguage": "pt-br"
 }
