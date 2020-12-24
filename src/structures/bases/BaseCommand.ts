@@ -1,20 +1,28 @@
-import { Collection, Message } from "discord.js"
-import { NewClient } from "../NewClient"
+import { Collection, Permissions } from "discord.js"
 import { defaultCommandCooldownTime, defaultCommandCooldownUsageLimit } from '../../../config.json'
-import { ICommandConfig, ICommandConfigReleasesNotesValues, ICommandParams }  from './BaseCommand.types'
+import { ICommandConfig, ICommandConfigReleasesNotesValues, ICommandParams, ICommandData, ICommandExecParams } from './BaseCommand.types'
 
 defaultCommandCooldownTime as number
 defaultCommandCooldownUsageLimit as number
 
 class BaseCommand {
   config: ICommandConfig
-  run: (params: { client?: NewClient, message?: Message, args?: string[]}) => void
+  data: ICommandData
+  props?: object
+  exec?: (params: ICommandExecParams) => void
 
-  constructor({ config, run }: ICommandParams) {
+  constructor({ config, data, props }: ICommandParams) {
     if (typeof config.aliases === 'string') config.aliases = [config.aliases]
     if (typeof config.categories === 'string') config.categories = [config.categories]
     if (!config.cooldown) config.cooldown = { time: defaultCommandCooldownTime, usageLimit: defaultCommandCooldownUsageLimit }
     if (typeof config.cooldown === 'number') config.cooldown = { time: config.cooldown, usageLimit: defaultCommandCooldownUsageLimit }
+    if (config.permissions) {
+      config.permissions.client = config.permissions.client ?? new Permissions()
+      config.permissions.member = config.permissions.member ?? new Permissions()
+      
+      config.permissions.client.add(config.permissions.both || 0)
+      config.permissions.member.add(config.permissions.both || 0)
+    }
 
     const releasesNotesEntries = config.releasesNotes?.map((release, version) => {
       const entry: [string, ICommandConfigReleasesNotesValues] = [
@@ -29,6 +37,20 @@ class BaseCommand {
       ]
 
       return entry
+    })
+
+    this.data = data
+    this.props = props // Apenas para receber os valores das chaves das props
+
+    this.exec?.({
+      args: this.data.args,
+      client: this.data.client,
+      lang: 'pt-br',
+      message: this.data.message,
+      texts: (textId: string | number, textData?: object) => {
+        return 'a'
+      },
+      props: this.props
     })
 
     this.config = {
@@ -47,10 +69,14 @@ class BaseCommand {
       lastUpdateAt: config.lastUpdateAt ?? new Date(config.lastUpdateTimestamp),
       lastUpdateTimestamp: config.lastUpdateTimestamp,
       version: config.version,
-      releasesNotes: new Collection(releasesNotesEntries)
+      releasesNotes: new Collection(releasesNotesEntries),
+      permissions: {
+        client: config.permissions?.client ?? new Permissions(),
+        member: config.permissions?.member ?? new Permissions()
+      }
     }
 
-    this.run = run
+
   }
 }
 
