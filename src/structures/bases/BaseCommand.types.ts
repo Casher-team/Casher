@@ -1,5 +1,6 @@
 import { Collection, Message, Permissions } from "discord.js";
 import { NewClient } from "../NewClient";
+import { Langs } from "../NewClient.types.";
 
 export interface ICommandConfigReleasesNotesValuesParams {
   version?: string
@@ -15,6 +16,7 @@ export interface ICommandConfigReleasesNotesValues extends ICommandConfigRelease
 }
 
 export interface ICommandConfigParams {
+  id: number
   name: string
   aliases?: string[] | string
   description?: string
@@ -72,6 +74,27 @@ export interface ICommandExecParams {
   message: Message
   args: string[]
   props?: object
-  lang: 'pt-br' | 'en-us'
+  lang: Langs
   texts: (textId: string | number, textData?: object) => string
+}
+
+interface ICommandProp {
+  name: string
+  text: string
+  position: number
+  required?: boolean
+}
+
+interface ICommandPropCommand extends ICommandProp {
+  maxLength?: number
+}
+
+interface ICommandPropText extends ICommandProp {
+  minLength: number,
+  maxLength: number,
+}
+
+export interface ICommandProps {
+  command: ICommandPropCommand
+  text: ICommandPropText
 }
