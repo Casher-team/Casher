@@ -17,9 +17,12 @@ class NewClient extends Client {
     this.events = new Collection()
     this.commands = new Collection()
     this.aliases = new Collection()
-    this.lang = 'pt-br'
-    this.defaultCommandCooldownTime = 0
-    this.defaultCommandCooldownUsageLimit = 1
+
+    /* Definições de algumas variáveis do bot */
+
+    this.lang = 'pt-br'                           // Idioma padrão do bot, para casos onde uma lingua não foi espécificada
+    this.defaultCommandCooldownTime = 0           // Tempo padrão de cooldown para um comando do bot, caso ele não seja especificado na criação do mesmo
+    this.defaultCommandCooldownUsageLimit = 1     // Número de vezes seguidas que um usuário pode usar um comando, dentro do tempo limite de cooldown sem que ele tenha restrições de uso
   }
 }
 
