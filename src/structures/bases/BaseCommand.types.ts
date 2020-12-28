@@ -78,23 +78,23 @@ export interface ICommandExecParams {
   texts: (textId: string | number, textData?: object) => string
 }
 
-interface ICommandProp {
+export type ICommandPropTypes =
+  | 'command'
+  | 'text'
+  | 'member'
+  | 'number'
+  | 'string'
+  | 'content'
+  | 'channel'
+
+export interface ICommandProp {
   name: string
   text: string
-  position: number
+  type: ICommandPropTypes
+  position?: number
   required?: boolean
-}
-
-interface ICommandPropCommand extends ICommandProp {
   maxLength?: number
-}
-
-interface ICommandPropText extends ICommandProp {
-  minLength: number,
-  maxLength: number,
-}
-
-export interface ICommandProps {
-  command: ICommandPropCommand
-  text: ICommandPropText
+  minLength?: number
+  joinSpace?: boolean
+  length?: number
 }
